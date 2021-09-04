@@ -26,7 +26,7 @@ const addGoalHandler = () => {
         <Button title="ADD" onPress={addGoalHandler}/>
       </View>
       <View>
-
+        {courseGoals.map((e) => <Text key={e}>{e}</Text>)}
       </View>
     </View>
   );
