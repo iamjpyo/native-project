@@ -4,13 +4,15 @@ import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState('');
+  const [courseGoals, setCourseGoals] = useState([])
 
 const goalInputHandler = (enteredText) => {
   setEnteredGoal(enteredText);
 }
 
 const addGoalHandler = () => {
-  console.log(enteredGoal);
+  setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
+  //currentGoals arrow function is a snapshot of the current state where the spread operator emulates it and then adds enteredGoal
 }
   return (
     <View style={styles.screen}>
