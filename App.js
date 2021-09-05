@@ -26,7 +26,7 @@ const addGoalHandler = () => {
         <Button title="ADD" onPress={addGoalHandler}/>
       </View>
       <View>
-        {courseGoals.map((e) => <Text key={e}>{e}</Text>)}
+        {courseGoals.map((e) => <View key={e} style={styles.goalList}><Text>{e}</Text></View>)}
       </View>
     </View>
   );
@@ -46,5 +46,12 @@ const styles = StyleSheet.create({
     borderBottomColor: "black", 
     borderBottomWidth: 1, 
     padding: 10
+  },
+  goalList: {
+    padding: 8,
+    marginVertical: 2,
+    backgroundColor: '#ccc',
+    borderColor: 'black',
+    borderWidth: 1
   }
 });
