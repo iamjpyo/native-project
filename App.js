@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ScrollView } from 'react-native';
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState('');
@@ -15,6 +15,7 @@ const addGoalHandler = () => {
   //currentGoals arrow function is a snapshot of the current state where the spread operator emulates it and then adds enteredGoal
 }
   return (
+    <ScrollView>
     <View style={styles.screen}>
       <View style={styles.inputContainer}>
         <TextInput 
@@ -25,10 +26,11 @@ const addGoalHandler = () => {
         />
         <Button title="ADD" onPress={addGoalHandler}/>
       </View>
-      <View>
+      <ScrollView>
         {courseGoals.map((e) => <View key={e} style={styles.goalList}><Text>{e}</Text></View>)}
-      </View>
+      </ScrollView>
     </View>
+    </ScrollView>
   );
 }
 
