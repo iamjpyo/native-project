@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState('');
@@ -11,11 +11,11 @@ const goalInputHandler = (enteredText) => {
 }
 
 const addGoalHandler = () => {
-  setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
+  setCourseGoals(currentGoals => [...currentGoals, { id: Math.random().toString(), value: enteredGoal}]);
   //currentGoals arrow function is a snapshot of the current state where the spread operator emulates it and then adds enteredGoal
+  //an object is being added with the purpose of adding a id per goal with a random number(which later will be extracted and turned into a key with keyExtractor prop), goal should be called by value
 }
   return (
-    <ScrollView>
     <View style={styles.screen}>
       <View style={styles.inputContainer}>
         <TextInput 
@@ -26,11 +26,8 @@ const addGoalHandler = () => {
         />
         <Button title="ADD" onPress={addGoalHandler}/>
       </View>
-      <ScrollView>
-        {courseGoals.map((e) => <View key={e} style={styles.goalList}><Text>{e}</Text></View>)}
-      </ScrollView>
+      <FlatList keyExtractor={(item, index) => item.id} data={courseGoals} renderItem={itemData =>(<View style={styles.goalList}><Text>{itemData.item.value}</Text></View>)}/>
     </View>
-    </ScrollView>
   );
 }
 
@@ -51,7 +48,7 @@ const styles = StyleSheet.create({
   },
   goalList: {
     padding: 8,
-    marginVertical: 2,
+    marginVertical: 6,
     backgroundColor: '#ccc',
     borderColor: 'black',
     borderWidth: 1
